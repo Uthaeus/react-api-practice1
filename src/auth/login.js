@@ -34,12 +34,12 @@ function Login() {
             <h1>Login</h1>
             <form onSubmit={handleSubmit(submitHandler)}>
                 <label htmlFor="email">Email</label>
-                <input id="email" {...register("email", { required: true })} />
-                {errors.email && <span>This field is required</span>}
+                <input type='text' id="email" {...register("email", { required: true })} />
+                {/* {errors.email && <span>This field is required</span>} */}
 
                 <label htmlFor="password">Password</label>
-                <input id="password" {...register("password", { required: true })} />
-                {errors.password && <span>This field is required</span>}
+                <input type='password' id="password" {...register("password", { required: true })} />
+                {/* {errors.password && <span>This field is required</span>} */}
 
                 <button type="submit">Submit</button>
             </form>

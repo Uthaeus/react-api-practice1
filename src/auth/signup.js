@@ -6,6 +6,7 @@ function Signup() {
     const navigate = useNavigate();
 
     function submitHandler(data) {
+        console.log(data);
         if (data.password !== data.password_confirmation) {
             console.log("Password and password confirmation do not match");
             return;
@@ -17,7 +18,7 @@ function Signup() {
                 password_confirmation: data.password_confirmation
             }
         };
-        fetch("http://localhost:4000/signup", {
+        fetch("http://localhost:4000", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -39,16 +40,16 @@ function Signup() {
             <h1>Signup</h1>
             <form onSubmit={handleSubmit(submitHandler)}>
                 <label htmlFor="email">Email</label>
-                <input id="email" {...register("email", { required: true })} />
-                {errors.email && <span>This field is required</span>}
+                <input type='text' id="email" {...register("email", { required: true })} />
+                {/* {errors.email && <span>This field is required</span>} */}
 
                 <label htmlFor="password">Password</label>
-                <input id="password" {...register("password", { required: true })} />
-                {errors.password && <span>This field is required</span>}
+                <input type='password' id="password" {...register("password", { required: true })} />
+                {/* {errors.password && <span>This field is required</span>} */}
 
                 <label htmlFor="password_confirmation">Password Confirmation</label>
-                <input id="password_confirmation" {...register("password_confirmation", { required: true })} />
-                {errors.password_confirmation && <span>This field is required</span>}
+                <input type='password' id="password_confirmation" {...register("password_confirmation", { required: true })} />
+                {/* {errors.password_confirmation && <span>This field is required</span>} */}
 
                 <button type="submit">Submit</button>
             </form>

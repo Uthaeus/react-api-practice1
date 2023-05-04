@@ -6,6 +6,7 @@ function MainNavigation() {
         <div>
             navigation
             <NavLink to='/' end>Home</NavLink>
+            <NavLink to='/user'>User</NavLink>
             <NavLink to='/login'>Login</NavLink>
             <NavLink to='/signup'>Signup</NavLink>
             <NavLink to='/logout'>Logout</NavLink>
