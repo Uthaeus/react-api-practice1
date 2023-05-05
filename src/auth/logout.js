@@ -6,14 +6,22 @@ function Logout() {
 
     useEffect(() => {
         fetch("http://localhost:4000/logout", {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                
+            }
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error("Logout failed");
             }
-            navigate("/");
+            //navigate("/");
             return response.json();
+        })
+        .then(data => {
+            localStorage.removeItem("token");
+            navigate("/");
         })
         .catch(error => console.log('logout error: ', error));
     }, [navigate]);

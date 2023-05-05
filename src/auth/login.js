@@ -23,8 +23,13 @@ function Login() {
             if (!response.ok) {
                 throw new Error("Login failed");
             }
-            navigate("/");
+            //navigate("/");
             return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            localStorage.setItem("token", data.jwt);
+            navigate("/");
         })
         .catch(error => console.log('login error: ', error));
     }

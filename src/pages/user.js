@@ -6,6 +6,10 @@ function UserPage() {
     useEffect(() => {
         fetch("http://localhost:4000/current_user", {
             method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                
+            },
         })
         .then(response => {
             if (!response.ok) {
