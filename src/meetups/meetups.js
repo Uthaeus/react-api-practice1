@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+import MeetupItem from "./meetup-item";
 
 function MeetupsPage() {
     const [meetups, setMeetups] = useState([]);
@@ -17,20 +20,15 @@ function MeetupsPage() {
     }, []);
 
     let meetupsList = meetups.map((meetup) => {
-        return (
-            <li key={meetup.id}>
-                {meetup.title}
-            </li>
-        );
+        return <MeetupItem key={meetup.id} meetup={meetup} />;
     });
 
     return (
         <div>
             <h1>Meetups Page</h1>
+            <Link to="/meetups/new">Create New Meetup</Link>
 
-            <ul>
-                {meetupsList}
-            </ul>
+            {meetupsList}
         </div>
     );
 }
