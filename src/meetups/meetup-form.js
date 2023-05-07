@@ -12,7 +12,7 @@ function MeetupForm({ meetup = {}}) {
             date: meetup.date || "",
             desciption: meetup.desciption || "",
             main_image: meetup.main_image || "",
-            thumbnail_image: meetup.thumbnail_image || ""
+            thumb_image: meetup.thumb_image || ""
         }
     });
 
@@ -25,7 +25,7 @@ function MeetupForm({ meetup = {}}) {
         formData.append("meetup[date]", data.date);
         formData.append("meetup[description]", data.description);
         formData.append("meetup[main_image]", data.main_image[0]);
-        formData.append("meetup[thumbnail_image]", data.thumbnail_image[0]);
+        formData.append("meetup[thumb_image]", data.thumb_image[0]);
 
         return formData;
     }
@@ -80,8 +80,8 @@ function MeetupForm({ meetup = {}}) {
             </div>
 
             <div className="form-group mb-2">
-                <label htmlFor="thumbnail_image">Thumbnail Image</label>
-                <input className="form-control" type="file" name="thumbnail_image" id="thumbnail_image" {...register("thumbnail_image")} />
+                <label htmlFor="thumb_image">Thumbnail Image</label>
+                <input className="form-control" type="file" name="thumb_image" id="thumb_image" {...register("thumb_image")} />
             </div>
 
             <div className="form-group mb-2">

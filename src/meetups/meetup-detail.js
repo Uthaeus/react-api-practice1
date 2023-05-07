@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+
+import Image from "../ui/Image";
 
 function MeetupDetail() {
     const [meetup, setMeetup] = useState({});
     const { meetupId } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`http://localhost:4000/meetups/${meetupId}`)
@@ -19,14 +22,40 @@ function MeetupDetail() {
             });
     }, [meetupId]);
 
+    function deleteHandler() {
+        fetch(`http://localhost:4000/meetups/${meetupId}`, {
+            method: "DELETE"
+        })
+            .then((response) => {
+                if (response.ok) {
+                    navigate("/meetups");
+                    return response.json();
+                }
+            })
+            .catch((error) => {
+                console.log("meetup delete error", error);
+            });
+    }
+
     return (
         <div>
-            <h1>{meetup.title}</h1>
+            <div>
+                <div>
+                    <h1>{meetup.title}</h1>
+                    {meetup.id}
+                    <p>{meetup.description}</p>
+                    {meetup.main_image?.url}
+                </div> 
 
-            <p>{meetup.description}</p>
+                <div>
+                    <Image src={meetup.main_image?.url} alt={meetup.title} type='main' />
+                </div>
+            </div>
 
             <div>
+                <button onClick={deleteHandler}>Delete</button>
                 <Link to={`/meetups/${meetupId}/edit`}>Edit</Link>
+                <Link to="/meetups">Back to Meetups</Link>
             </div>
         </div>
     );
