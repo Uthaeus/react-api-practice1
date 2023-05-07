@@ -5,7 +5,6 @@ import RootLayout from "./pages/root";
 import ErrorPage from "./pages/error";
 import HomePage from "./pages/home";
 import Login from "./auth/login";
-import Logout from "./auth/logout";
 import Signup from "./auth/signup";
 import UserPage from "./pages/user";
 import MeetupLayout from "./meetups/meetup-layout";
@@ -31,10 +30,6 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />
-      },
-      {
-        path: "/logout",
-        element: <Logout />
       },
       {
         path: "/signup",

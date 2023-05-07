@@ -1,6 +1,17 @@
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../store/auth-context";
 
 function MainNavigation() {
+    const authCtx = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    function logoutHandler() {
+        authCtx.onLogout();
+        navigate('/');
+    }
 
     return (
         <div>
@@ -10,7 +21,7 @@ function MainNavigation() {
             <NavLink to='/user'>User</NavLink>
             <NavLink to='/login'>Login</NavLink>
             <NavLink to='/signup'>Signup</NavLink>
-            <NavLink to='/logout'>Logout</NavLink>
+            <button onClick={logoutHandler}>Logout</button>
         </div>
     );
 }

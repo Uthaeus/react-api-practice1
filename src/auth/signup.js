@@ -1,57 +1,83 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+
+import { AuthContext } from "../store/auth-context";
 
 function Signup() {
     const { register, handleSubmit, errors } = useForm();
     const navigate = useNavigate();
+    const authCtx = useContext(AuthContext);
 
-    function submitHandler(data) {
+    function submitHander(data) {
         console.log(data);
-        if (data.password !== data.password_confirmation) {
-            console.log("Password and password confirmation do not match");
+        if (data.password !== data.confirmPassword) {
             return;
         }
+
         let dataToSend = {
             user: {
+                username: data.username,
                 email: data.email,
-                password: data.password,
-                password_confirmation: data.password_confirmation
+                password: data.password
             }
         };
-        fetch("http://localhost:4000", {
-            method: "POST",
+
+        fetch('http://localhost:4000/users', {
+            method: 'POST',
+            body: JSON.stringify(dataToSend),
             headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(dataToSend)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Signup failed");
+                'Content-Type': 'application/json'
             }
-            navigate("/");
-            return response.json();
         })
-        .catch(error => console.log('signup error: ', error));
+            .then(res => {
+                if (res.ok) {
+                    console.log('res:', res);
+                    return res.json();
+                }
+            })
+            .then(data => {
+                authCtx.initUser(data);
+                navigate('/');
+            })
+            .catch(err => {
+                console.log('signup error:', err);
+            });
+
     }
 
     return (
         <div>
             <h1>Signup</h1>
-            <form onSubmit={handleSubmit(submitHandler)}>
-                <label htmlFor="email">Email</label>
-                <input type='text' id="email" {...register("email", { required: true })} />
-                {/* {errors.email && <span>This field is required</span>} */}
+            
+            <form onSubmit={handleSubmit(submitHander)}>
+                <div className='form-group'>
+                    <label htmlFor='username'>Username</label>
+                    <input type='text' className='form-control' {...register('username', { required: true })} />
+                    {errors?.username && <span className='text-danger'>This field is required</span>}
+                </div>
 
-                <label htmlFor="password">Password</label>
-                <input type='password' id="password" {...register("password", { required: true })} />
-                {/* {errors.password && <span>This field is required</span>} */}
+                <div className='form-group'>
+                    <label htmlFor='email'>Email</label>
+                    <input type='email' className='form-control' {...register('email', { required: true })} />
+                    {errors?.email && <span className='text-danger'>This field is required</span>}
+                </div>
 
-                <label htmlFor="password_confirmation">Password Confirmation</label>
-                <input type='password' id="password_confirmation" {...register("password_confirmation", { required: true })} />
-                {/* {errors.password_confirmation && <span>This field is required</span>} */}
+                <div className='form-group'>
+                    <label htmlFor='password'>Password</label>
+                    <input type='password' className='form-control' {...register('password', { required: true })} />
+                    {errors?.password && <span className='text-danger'>This field is required</span>}
+                </div>
 
-                <button type="submit">Submit</button>
+                <div className='form-group'>
+                    <label htmlFor='confirmPassword'>Confirm Password</label>
+                    <input type='password' className='form-control' {...register('confirmPassword', { required: true })} />
+                    {errors?.confirmPassword && <span className='text-danger'>This field is required</span>}
+                </div>
+
+                <div className='form-group'>
+                    <button type='submit' className='btn btn-primary'>Signup</button>
+                </div>
             </form>
         </div>
     );

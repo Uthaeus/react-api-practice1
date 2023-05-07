@@ -7,21 +7,19 @@ import { AuthContext } from "../store/auth-context";
 function Login() {
     const { register, handleSubmit, errors } = useForm();
     const navigate = useNavigate();
-    const { login } = useContext(AuthContext);
+    const authCtx = useContext(AuthContext);
 
     function submitHandler(data) {
         let dataToSend = {
-            user: {
                 email: data.email,
                 password: data.password
-            }
         };
-        fetch("http://localhost:4000/login", {
+        fetch("http://localhost:4000/users/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(dataToSend)
+            body: JSON.stringify(data)
         })
         .then(response => {
             if (!response.ok) {
@@ -32,11 +30,10 @@ function Login() {
         })
         .then(data => {
             console.log(data);
-            localStorage.setItem("token", data.jwt);
-            login();
+            authCtx.initUser(data);
             navigate("/");
         })
-        .catch(error => console.log('login error: ', error));
+        .catch(error => console.log('login error: ', error.message));
     }
 
     return (
@@ -45,11 +42,11 @@ function Login() {
             <form onSubmit={handleSubmit(submitHandler)}>
                 <label htmlFor="email">Email</label>
                 <input type='text' id="email" {...register("email", { required: true })} />
-                {/* {errors.email && <span>This field is required</span>} */}
+                {errors?.email && <span>This field is required</span>}
 
                 <label htmlFor="password">Password</label>
                 <input type='password' id="password" {...register("password", { required: true })} />
-                {/* {errors.password && <span>This field is required</span>} */}
+                {errors?.password && <span>This field is required</span>}
 
                 <button type="submit">Submit</button>
             </form>
