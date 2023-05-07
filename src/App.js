@@ -8,6 +8,8 @@ import Login from "./auth/login";
 import Logout from "./auth/logout";
 import Signup from "./auth/signup";
 import UserPage from "./pages/user";
+import MeetupLayout from "./meetups/meetup-layout";
+import MeetupsPage from "./meetups/meetups";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,17 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />
+      }
+    ]
+  },
+  {
+    path: "/meetups",
+    element: <MeetupLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <MeetupsPage />
       }
     ]
   }

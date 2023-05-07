@@ -1,9 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+
+import { AuthContext } from "../store/auth-context";
 
 function Login() {
     const { register, handleSubmit, errors } = useForm();
     const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
 
     function submitHandler(data) {
         let dataToSend = {
@@ -29,6 +33,7 @@ function Login() {
         .then(data => {
             console.log(data);
             localStorage.setItem("token", data.jwt);
+            login();
             navigate("/");
         })
         .catch(error => console.log('login error: ', error));
