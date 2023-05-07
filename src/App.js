@@ -10,6 +10,9 @@ import Signup from "./auth/signup";
 import UserPage from "./pages/user";
 import MeetupLayout from "./meetups/meetup-layout";
 import MeetupsPage from "./meetups/meetups";
+import NewMeetup from "./meetups/new-meetup";
+import EditMeetup from "./meetups/edit-meetup";
+import MeetupDetail from "./meetups/meetup-detail";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +50,18 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <MeetupsPage />
+      },
+      {
+        path: "/meetups/new",
+        element: <NewMeetup />
+      },
+      {
+        path: "/meetups/:meetupId/edit",
+        element: <EditMeetup />
+      },
+      {
+        path: "/meetups/:meetupId",
+        element: <MeetupDetail />
       }
     ]
   }
