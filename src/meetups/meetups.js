@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import MeetupItem from "./meetup-item";
+import { AuthContext } from "../store/auth-context";
 
 function MeetupsPage() {
     const [meetups, setMeetups] = useState([]);
+    const authCtx = useContext(AuthContext);
 
     useEffect(() => {
         fetch("http://localhost:4000/meetups")
@@ -26,7 +28,7 @@ function MeetupsPage() {
     return (
         <div>
             <h1>Meetups Page</h1>
-            <Link to="/meetups/new">Create New Meetup</Link>
+            {authCtx.isLoggedIn && <Link to="/meetups/new">Create New Meetup</Link>}
 
             {meetupsList}
         </div>

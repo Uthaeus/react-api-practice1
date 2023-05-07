@@ -1,24 +1,32 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
-function MeetupForm({ meetup = {}}) {
+import { AuthContext } from "../store/auth-context";
+
+function MeetupForm({ meetup }) {
     const navigate = useNavigate();
-    const { register, handleSubmit, errors, reset } = useForm({
-        defaultValues: {
-            title: meetup.title || "",
-            location: meetup.location || "",
-            time: meetup.time || "",
-            date: meetup.date || "",
-            desciption: meetup.desciption || "",
-            main_image: meetup.main_image || "",
-            thumb_image: meetup.thumb_image || ""
+    const { register, handleSubmit, errors, reset } = useForm();
+    const authCtx = useContext(AuthContext);
+
+    useEffect(() => {
+        if (meetup) {
+            reset({
+                title: meetup.title,
+                location: meetup.location,
+                time: meetup.time,
+                date: meetup.date,
+                description: meetup.description,
+                main_image: meetup.main_image,
+                thumb_image: meetup.thumb_image
+            });
         }
-    });
+    }, [meetup, reset]);
 
     function buildForm(data) {
         const formData = new FormData();
 
+        authCtx.isLoggedIn && formData.append("meetup[user_id]", authCtx.user.id);
         formData.append("meetup[title]", data.title);
         formData.append("meetup[location]", data.location);
         formData.append("meetup[time]", data.time);

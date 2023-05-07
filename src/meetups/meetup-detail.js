@@ -44,7 +44,7 @@ function MeetupDetail() {
                     <h1>{meetup.title}</h1>
                     {meetup.id}
                     <p>{meetup.description}</p>
-                    {meetup.main_image?.url}
+                    <p>User info: {meetup.user_id} | {meetup.user?.username}</p>
                 </div> 
 
                 <div>
