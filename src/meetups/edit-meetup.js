@@ -21,8 +21,8 @@ function EditMeetup() {
     }, [meetupId]);
 
     return (
-        <div>
-            <h1>Create New Meetup</h1>
+        <div className="new-edit-container">
+            <h1 className="new-edit-title">Edit Meetup</h1>
 
             <MeetupForm meetup={meetup} />
         </div>

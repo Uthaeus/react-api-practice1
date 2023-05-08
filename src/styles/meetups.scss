@@ -81,3 +81,54 @@
         }
     }
 }
+
+// Meetups New & Edit Page
+
+.new-edit-container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 2rem 0;
+
+    .new-edit-title {
+        font-size: 2.4em;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        padding: 20px;
+        color: rgb(93, 187, 218);
+        border-bottom: 2px solid rgb(93, 187, 218);
+    }
+}
+
+// Meetup Form
+
+.meetup-form {
+    width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+
+    .form-col-two {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    .meetup-form-btn {
+        padding: 14px 22px;
+        border: none;
+        background-color: rgb(47, 120, 184);
+        color: blanchedalmond;
+        font-size: 2.4em;
+        border-radius: 50%;
+        box-shadow: 2px 2px 5px rgba(93, 187, 218, 0.312);
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+            box-shadow: 3px 3px 5px rgba(93, 187, 218, 0.539);
+            transform: scale(1.05);
+        }
+    }
+}

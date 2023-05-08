@@ -2,8 +2,8 @@ import MeetupForm from "./meetup-form";
 
 function NewMeetup() {
     return (
-        <div>
-            <h1>Create New Meetup</h1>
+        <div className="new-edit-container">
+            <h1 className="new-edit-title">Create New Meetup</h1>
 
             <MeetupForm />
         </div>
