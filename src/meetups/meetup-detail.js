@@ -6,6 +6,8 @@ import Image from "../ui/Image";
 
 function MeetupDetail() {
     const [meetup, setMeetup] = useState({});
+    const [comments, setComments] = useState([]);
+    const [comment, setComment] = useState("");
     const { meetupId } = useParams();
     const navigate = useNavigate();
 
@@ -16,11 +18,20 @@ function MeetupDetail() {
             })
             .then((data) => {
                 setMeetup(data);
+                setComments(data.comments);
             })
             .catch((error) => {
                 console.log('meetup show error', error);
             });
     }, [meetupId]);
+
+    function commentChangeHandler(event) {
+        setComment(event.target.value);
+    }
+
+    function commentSubmitHandler() {
+        
+    }
 
     function deleteHandler() {
         fetch(`http://localhost:4000/meetups/${meetupId}`, {
@@ -49,6 +60,21 @@ function MeetupDetail() {
 
                 <div>
                     <Image src={meetup.main_image?.url} alt={meetup.title} type='main' />
+                </div>
+
+                <div>
+                    <div>
+                        <textarea placeholder="Add a comment" onChange={commentChangeHandler} value={comment} />
+                        <button onClick={commentSubmitHandler}>Submit</button>
+                    </div>
+                    {comments.map((comment) => {
+                        return (
+                            <div key={comment.id}>
+                                <p>{comment.content}</p>
+                                <p>User info: {comment.user_id} | {comment.user?.username}</p>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
