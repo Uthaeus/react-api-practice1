@@ -26,9 +26,9 @@ function MeetupsPage() {
     });
 
     return (
-        <div>
-            <h1>Meetups Page</h1>
-            {authCtx.isLoggedIn && <Link to="/meetups/new">Create New Meetup</Link>}
+        <div className="meetups-container">
+            <h1 className="meetups-title">Meetups Page</h1>
+            {authCtx.isLoggedIn && <Link to="/meetups/new" className="new-meetup-btn">Create New Meetup</Link>}
 
             {meetupsList}
         </div>

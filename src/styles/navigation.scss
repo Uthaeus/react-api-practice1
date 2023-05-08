@@ -15,6 +15,7 @@
 
     .nav-links-wrapper {
         display: flex;
+        align-items: center;
     }
 
     .nav-link {
@@ -40,5 +41,6 @@
 
     .nav-auth-wrapper {
         display: flex;
+        align-items: center;
     }
 }

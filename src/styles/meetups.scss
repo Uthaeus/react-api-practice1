@@ -1,5 +1,83 @@
+// Meetups Index Page
+.meetups-container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
 
-body {
-    background-color: grey;
-    color: white;
+    .meetups-title {
+        font-size: 2.4em;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        padding: 10px 20px;
+        color: rgb(218, 218, 93);
+        border-bottom: 2px solid rgb(218, 218, 93);
+    }
+
+    .new-meetup-btn {
+        font-size: 1.6em;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        padding: 5px 10px;
+        background-color: royalblue;
+        color: white;
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(47, 120, 184);
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+        }
+    }
+}
+
+// Meetups Index Item
+.meetup-item-container {
+    width: 100%;
+    margin-bottom: 2rem;
+    background-color: #161616;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(66, 46, 21, 0.5);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #1a1a1a;
+        box-shadow: 5px 5px 7px 3px rgb(66, 46, 21);
+        transform: scale(1.02);
+    }
+
+    .meetup-item-title {
+        width: 100%;
+        text-align: center;
+        font-size: 1.8em;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        padding: 20px 0;
+        color: rgb(93, 187, 218);
+    }
+
+    .meetup-item-user {
+        margin-left: 3rem;
+        font-size: 0.6em;
+        color: rgba(134, 126, 139, 0.649);
+    }
+
+    .meetup-item-details {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 30px 20px;
+
+        .meetup-item-detail {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: rgb(17, 152, 107);
+        }
+    }
 }
