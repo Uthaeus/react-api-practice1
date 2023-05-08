@@ -10,10 +10,6 @@ function Login() {
     const authCtx = useContext(AuthContext);
 
     function submitHandler(data) {
-        let dataToSend = {
-                email: data.email,
-                password: data.password
-        };
         fetch("http://localhost:4000/users/login", {
             method: "POST",
             headers: {

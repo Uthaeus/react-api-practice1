@@ -15,14 +15,17 @@ function AuthContextProvider({children}) {
     function logoutHandler() {
         setIsLoggedIn(false);
         setUser(null);
+        localStorage.removeItem('token');
     }
 
     function loginHandler() {
         setIsLoggedIn(true);
+        
     }
 
     function initUser(data) {
         setUser(data);
+        localStorage.setItem('token', data.id);
         loginHandler();
     }
 

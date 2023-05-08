@@ -8,10 +8,15 @@ function MeetupDetail() {
     const [meetup, setMeetup] = useState({});
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const { meetupId } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (localStorage.getItem("token")) {
+            setIsLoggedIn(true);
+        }
+
         fetch(`http://localhost:4000/meetups/${meetupId}`)
             .then((response) => {
                 return response.json();
@@ -29,8 +34,34 @@ function MeetupDetail() {
         setComment(event.target.value);
     }
 
-    function commentSubmitHandler() {
-        
+    function commentSubmitHandler(e) {
+        e.preventDefault();
+
+        fetch("http://localhost:4000/comments", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "token": localStorage.getItem("token")
+            },
+            body: JSON.stringify({
+                comment: {
+                    content: comment,
+                    meetup_id: meetupId
+                }
+            })
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+            })
+            .then((data) => {
+                setComments([data, ...comments]);
+                setComment("");
+            })
+            .catch((error) => {
+                console.log("comment create error", error);
+            });
     }
 
     function deleteHandler() {
@@ -63,11 +94,13 @@ function MeetupDetail() {
                 </div>
 
                 <div>
-                    <div>
-                        <textarea placeholder="Add a comment" onChange={commentChangeHandler} value={comment} />
-                        <button onClick={commentSubmitHandler}>Submit</button>
-                    </div>
-                    {comments.map((comment) => {
+                    {isLoggedIn && (
+                        <div>
+                            <textarea placeholder="Add a comment" onChange={commentChangeHandler} value={comment} rows={5} />
+                            <button onClick={commentSubmitHandler}>Submit</button>
+                        </div>
+                    )}
+                    {comments?.map((comment) => {
                         return (
                             <div key={comment.id}>
                                 <p>{comment.content}</p>
