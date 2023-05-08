@@ -14,27 +14,31 @@ function MainNavigation() {
   }
 
   return (
-    <div>
-      <div>
+    <div className="navigation-container">
+      <div className="nav-title-wrapper">
         {authCtx.isLoggedIn ? (
           <span>Logged in as {authCtx.user.username}</span>
         ) : (
           <span>Welcome!</span>
         )}
       </div>
-      <NavLink to="/" end>
-        Home
-      </NavLink>
-      <NavLink to="/meetups">Meetups</NavLink>
-      <NavLink to="/user">User</NavLink>
-      {!authCtx.isLoggedIn ? (
-        <>
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/signup">Signup</NavLink>
-        </>
-      ) : (
-        <button onClick={logoutHandler}>Logout</button>
-      )}
+      <div className="nav-links-wrapper">
+        <NavLink to="/" end className={({isActive}) => isActive ? 'nav-link active-link' : 'nav-link'}>
+          Home
+        </NavLink>
+        <NavLink to="/meetups" className={({isActive}) => isActive ? 'nav-link active-link' : 'nav-link'}>Meetups</NavLink>
+        <NavLink to="/user" className={({isActive}) => isActive ? 'nav-link active-link' : 'nav-link'}>User</NavLink>
+      </div>
+      <div className="nav-auth-wrapper">
+        {!authCtx.isLoggedIn ? (
+          <>
+            <NavLink to="/login" className={({isActive}) => isActive ? 'nav-link active-link' : 'nav-link'}>Login</NavLink>
+            <NavLink to="/signup" className={({isActive}) => isActive ? 'nav-link active-link' : 'nav-link'}>Signup</NavLink>
+          </>
+        ) : (
+          <p onClick={logoutHandler} className="nav-link">Logout</p>
+        )}
+      </div>
     </div>
   );
 }

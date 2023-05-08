@@ -94,7 +94,7 @@ function MeetupDetail() {
                 </div>
 
                 <div>
-                    {isLoggedIn && (
+                    {isLoggedIn === true && (
                         <div>
                             <textarea placeholder="Add a comment" onChange={commentChangeHandler} value={comment} rows={5} />
                             <button onClick={commentSubmitHandler}>Submit</button>
