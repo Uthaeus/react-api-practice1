@@ -79,6 +79,8 @@ function MeetupDetail() {
       });
   }
 
+  console.log('comments', comments);
+
   let meetupUser = meetup.user ? meetup.user.username : "anonymous";
   let imageUrl = meetup.main_image ? `http://localhost:4000${meetup.main_image.url}` : "https://via.placeholder.com/600x300";
 
@@ -111,31 +113,32 @@ function MeetupDetail() {
         <p className="detail-description">{meetup.description}</p>
 
         <div className="detail-actions">
-          <button onClick={deleteHandler}>Delete</button>
-          <Link to={`/meetups/${meetupId}/edit`}>Edit</Link>
-          <Link to="/meetups">Back to Meetups</Link>
+          <button onClick={deleteHandler} className="detail-btn detail-delete">Delete</button>
+          <Link to={`/meetups/${meetupId}/edit`} className="detail-btn detail-edit">Edit</Link>
+          <Link to="/meetups" className="detail-btn detail-back">Back to Meetups</Link>
         </div>
       </div>
 
       <div className="detail-col-right">
         <div>
           {isLoggedIn === true && (
-            <div>
+            <>
               <textarea
+                className="comment-input"
                 placeholder="Add a comment"
                 onChange={commentChangeHandler}
                 value={comment}
                 rows={5}
               />
-              <button onClick={commentSubmitHandler}>Submit</button>
-            </div>
+              <button className="comment-btn" onClick={commentSubmitHandler}>Submit</button>
+            </>
           )}
           {comments?.map((comment) => {
             return (
-              <div key={comment.id}>
-                <p>{comment.content}</p>
-                <p>
-                  User info: {comment.user_id} | {comment.user?.username}
+              <div className="comment-wrapper" key={comment.id}>
+                <p className="comment-content">{comment.content}</p>
+                <p className="comment-user">
+                  - comment by {comment.user?.username}
                 </p>
               </div>
             );

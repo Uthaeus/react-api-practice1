@@ -1,8 +1,58 @@
 // Meetups Index Page
 .meetups-container {
-    width: 60%;
+    width: 90%;
     margin: 0 auto;
-    padding: 2rem 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    .meetups-sidebar {
+        padding: 2rem;
+        border-left: 2px solid rgba(218, 218, 93, 0.097);
+
+        .meetups-sidebar-title {
+            font-size: 2.2em;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding: 10px 20px;
+            color: rgb(93, 218, 153);
+        }
+    }
+
+    .meetup-side-item {
+        width: 100%;
+        background-color: grey;
+        margin-top: 4rem;
+    }
+}
+
+.slide-in {
+    animation: slide-in 0.5s ease-in-out;
+}
+
+.slide-out {
+    animation: slide-out 0.5s ease-in-out;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+    
+@keyframes slide-out {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.meetups-wrapper {
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
 
@@ -141,4 +191,145 @@
     padding: 2rem 0;
     display: grid;
     grid-template-columns: 3fr 2fr;
+
+    .detail-col-left {
+        display: flex;
+        flex-direction: column;
+        padding: 0 2rem;
+
+        .detail-header {
+
+            .detail-title-wrapper {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+                .detail-title {
+                    font-size: 2.4em;
+                    font-weight: 600;
+                    margin-bottom: 2rem;
+                    padding: 20px;
+                    color: rgb(93, 187, 218);
+                    border-bottom: 2px solid rgb(93, 187, 218);
+                }
+
+                .detail-user {
+                    font-size: 0.8em;
+                    color: rgba(134, 126, 139, 0.649);
+                    border-bottom: 1px solid rgba(134, 126, 139, 0.649);
+                }
+            }
+
+            .details-wrapper {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                margin-bottom: 2rem;
+    
+                .detail-item {
+                    font-size: 1.2em;
+                    font-weight: 600;
+                    color: rgb(17, 152, 107);
+                }
+            }
+        }
+
+        .detail-description {
+            width: 90%;
+            min-height: 150px;
+            margin: 2rem 0;
+            border-radius: 5px;
+            background-color: #e5e7e9;
+            padding: 1rem;
+            color: black;
+        }
+
+        .detail-actions {
+            padding: 1rem 0;
+
+            .detail-btn {
+                padding: 8px 20px;
+                box-shadow: 2px 2px 5px rgba(93, 187, 218, 0.312);
+                text-decoration: none;
+                border: none;
+                transition: all 0.3s ease-in-out;
+                color: white;
+                border-radius: 4px;
+
+                &:hover {
+                    cursor: pointer;
+                    opacity: 0.8;
+                    box-shadow: 3px 3px 6px rgba(93, 187, 218, 0.743);
+                    transform: scale(1.05);
+                }
+            }
+
+            .detail-delete {
+                background-color: rgb(217, 83, 79);
+            }
+
+            .detail-edit {
+                background-color: rgb(47, 120, 184);
+                margin-left: 2rem;
+            }
+
+            .detail-back {
+                background-color: rgb(93, 187, 218);
+                margin-left: 2rem;
+            }
+        }
+    }
+
+    .detail-col-right {
+        padding: 1rem 2rem;
+
+        .comment-input {
+            width: 100%;
+            min-height: 100px;
+            margin: 1rem 0;
+            border-radius: 5px;
+            background-color: #e5e7e9;
+            padding: 1rem;
+            color: black;
+        }
+
+        .comment-btn {
+            padding: 5px 20px;
+            float: right;
+            border-radius: 4px;
+            background-color: rgb(47, 120, 184);
+            color: blanchedalmond;
+            box-shadow: 2px 2px 5px rgba(93, 187, 218, 0.312);
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                cursor: pointer;
+                opacity: 0.8;
+                box-shadow: 3px 3px 6px rgba(93, 187, 218, 0.743);
+                transform: scale(1.05);
+            }
+        }
+
+        .comment-wrapper {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-bottom: 1px solid rgba(134, 126, 139, 0.649);
+
+            .comment-content {
+                width: 100%;
+                color: white;
+            }
+
+            .comment-user {
+                width: 100%;
+                color: rgba(134, 126, 139, 0.649);
+                text-align: right;
+                margin-bottom: -1rem;
+            }
+        }
+    }
 }
